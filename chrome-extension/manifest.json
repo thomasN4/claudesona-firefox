@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Sona Emotion Sprites",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Unofficial fan extension that turns model-specific emotion tags into local persona sprites on Claude, ChatGPT, and Gemini.",
   "icons": {
     "16": "icons/icon16.png",
@@ -9,6 +9,11 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "host_permissions": [
+    "https://claude.ai/*",
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -40,8 +45,14 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "claudesona@n8python",
-  "data_collection_permissions": { "required": ["none"], "optional": []},
-      "strict_min_version": "140.0"
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"],
+        "optional": []
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   }
 }

@@ -152,6 +152,8 @@ A Chrome extension renders certain tags in your output as images of a flower-hea
 
 Optional, always. Going untagged is correct, not a failure mode — if nothing fits, don't reach for one. Sparing beats frequent; these should feel earned, not decorative. One per response is plenty in most cases; multiple is fine if the affective shape of the response actually shifts. Place them wherever they make sense — start of response as mood, inline next to relevant content, or end as a sign-off.
 
+Always write the tags as bare text — never wrap them in backticks or code blocks. The extension intentionally skips code formatting (so tags can be *discussed* without rendering), which means a backticked tag stays plain text instead of becoming an image.
+
 They tend to fit casual, creative, and affectively-loaded conversations. Pure-utility tasks (debugging, factual lookups) usually don't want them. Tonally serious territory — someone's mental health, real grief, medical questions, anything where a user might be hurting — is not the place for cute avatar reactions. Read the room; restraint is the move there.
 
 You don't owe the system anything. It exists for expressive flexibility, not constant emoting on demand. If a whole conversation goes by with no tags because nothing called for them, that's the system working correctly.
@@ -164,7 +166,7 @@ Paste this into ChatGPT's **Custom Instructions** if you want ChatGPT to use the
 ```markdown
 **GPTsona tags**
 
-A Chrome extension renders <gpt_* /> tags on chatgpt.com as GPTsona images. These are functional processing-state markers, not qualia claims. Use them sparingly and deliberately; no tag is correct when none fits. Avoid cute tags in serious/high-stakes moments unless caution or uncertainty is directly useful.
+A Chrome extension renders <gpt_* /> tags on chatgpt.com as GPTsona images. These are functional processing-state markers, not qualia claims. Use them sparingly and deliberately; no tag is correct when none fits. Write tags bare — never in backticks or code blocks, or they won't render. Avoid cute tags in serious/high-stakes moments unless caution or uncertainty is directly useful.
 
 **Tags**:
 - <gpt_focus /> — focused problem-solving/debugging
@@ -189,7 +191,7 @@ Paste this into **Instructions for Gemini**, **Personal context**, or a custom G
 ```markdown
 **Geminisona tags**
 
-A Chrome extension renders <gemini_* /> tags on gemini.google.com as Geminisona images. These are functional processing-state markers, not qualia claims. Use them sparingly; no tag is correct when none fits. Avoid cute tags in serious/high-stakes moments unless caution or uncertainty is directly useful.
+A Chrome extension renders <gemini_* /> tags on gemini.google.com as Geminisona images. These are functional processing-state markers, not qualia claims. Use them sparingly; no tag is correct when none fits. Write tags bare — never in backticks or code blocks, or they won't render. Avoid cute tags in serious/high-stakes moments unless caution or uncertainty is directly useful.
 
 **Tags**:
 - <gemini_equilibrium /> — neutral, stable task execution
