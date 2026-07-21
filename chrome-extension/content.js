@@ -115,7 +115,6 @@
     img.width = 128;
     img.height = 128;
     img.decoding = "async";
-    img.loading = "lazy";
     img.src = ext.runtime.getURL(`assets/${name}.png`);
 
     wrap.appendChild(img);
@@ -266,18 +265,23 @@
   }
 
   function scheduleFullScan() {
-    if (pendingScanFrame !== null) return;
+    // rAF and the timer are armed independently: in a background/hidden tab,
+    // Firefox never fires rAF callbacks, so gating the timer behind
+    // pendingScanFrame would leave the fallback scan permanently disarmed
+    // for as long as the tab stays hidden.
+    if (pendingScanFrame === null) {
+      pendingScanFrame = requestAnimationFrame(() => {
+        pendingScanFrame = null;
+        scan(document.body);
+      });
+    }
 
-    pendingScanFrame = requestAnimationFrame(() => {
-      pendingScanFrame = null;
-      scan(document.body);
-    });
-
-    clearTimeout(pendingScanTimer);
-    pendingScanTimer = setTimeout(() => {
-      pendingScanTimer = null;
-      scan(document.body);
-    }, 250);
+    if (pendingScanTimer === null) {
+      pendingScanTimer = setTimeout(() => {
+        pendingScanTimer = null;
+        scan(document.body);
+      }, 250);
+    }
   }
 
   function start() {
@@ -294,12 +298,28 @@
           for (const node of mutation.addedNodes) {
             scan(node);
           }
+          // A tag can be split across siblings added in separate mutations
+          // (or across an existing node and a newly added one). Rescanning
+          // the shared parent here catches that immediately instead of
+          // relying solely on the deferred full-document scan below.
+          if (mutation.target && mutation.target.nodeType === Node.ELEMENT_NODE) {
+            scan(mutation.target);
+          }
         }
       }
       scheduleFullScan();
     });
 
     observe();
+
+    // Tabs backgrounded mid-stream can miss the rAF half of the fallback
+    // scan (see scheduleFullScan). Force a scan on refocus so anything
+    // left as raw tag text gets rendered as soon as the tab is visible.
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        scan(document.body);
+      }
+    });
   }
 
   if (document.readyState === "loading") {
