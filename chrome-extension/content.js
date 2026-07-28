@@ -71,8 +71,9 @@
   const EMOTIONS = new Set(
     ACTIVE_SITE.emotions.map((emotion) => `${ACTIVE_SITE.prefix}_${emotion}`),
   );
+  const TAG_GAP = "[\\s\\u200B\\u200C\\u200D\\uFEFF]*";
   const TAG_RE = new RegExp(
-    `<\\s*(${ACTIVE_SITE.prefix}_(?:${ACTIVE_SITE.emotions.join("|")}))\\s*(?:\\/\\s*)?>`,
+    `<${TAG_GAP}(${ACTIVE_SITE.prefix}_(?:${ACTIVE_SITE.emotions.join("|")}))${TAG_GAP}(?:\\/${TAG_GAP})?>`,
     "g",
   );
   const TEXT_HINT = `${ACTIVE_SITE.prefix}_`;
