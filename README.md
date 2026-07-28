@@ -19,7 +19,7 @@ Important: choose the inner `chrome-extension` folder, not the whole repository 
 
 You can also download a prebuilt ZIP from `dist/`, unzip it, and load the unzipped folder with **Load unpacked**.
 
-Latest ZIP: [`dist/sona-emotion-sprites-latest.zip`](dist/sona-emotion-sprites-latest.zip), currently the same build as [`dist/sona-emotion-sprites-1.1.3.zip`](dist/sona-emotion-sprites-1.1.3.zip).
+Latest ZIP: [`dist/sona-emotion-sprites-latest.zip`](dist/sona-emotion-sprites-latest.zip), currently the same build as [`dist/sona-emotion-sprites-1.1.4.zip`](dist/sona-emotion-sprites-1.1.4.zip).
 
 Older Claude-only builds such as `claudesona-emotion-sprites-1.0.1.zip` are kept for reference; use the `sona-emotion-sprites-*` ZIP for Claude + GPT + Gemini support.
 
